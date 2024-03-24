@@ -9,16 +9,31 @@ public class SayaTubeVideo
 
     public SayaTubeVideo(string judul)
 	{
-		
-		id = random.Next(10000, 99999);
-		title = judul;
-		playCount = 0;
+		if (string.IsNullOrEmpty(judul) || judul.Length > 100)
+		{
+			Console.WriteLine("Invalid Input");
+		} else
+		{
+            id = random.Next(10000, 99999);
+            title = judul;
+            playCount = 0;
+        }
 	}
 
-	public void IncreasePlayCount(int angka)
+	public void IncreasePlayCount(int tambahan)
 	{
-		playCount = playCount + angka;
-	}
+        try
+        {
+            checked
+            {
+                this.playCount = playCount + tambahan;
+            }
+        }
+        catch (OverflowException)
+        {
+            Console.WriteLine("Input Overflow");
+        }
+    }
 
 	public void PrintVideoDetails()
 	{
